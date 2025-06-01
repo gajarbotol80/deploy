@@ -1,0 +1,97 @@
+/* public/css/style.css */
+/* Custom global styles that complement Tailwind CSS for NodeDeploy Pro v3 */
+
+html {
+    scroll-behavior: smooth;
+}
+
+*:focus-visible {
+    outline: 3px solid #8b5cf6; /* purple-500 */
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.25); /* Lighter purple shadow */
+}
+
+/* Custom scrollbar for elements with overflow */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(51, 65, 85, 0.5); /* slate-700 with opacity */
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #64748b; /* slate-500 */
+    border-radius: 10px;
+    border: 2px solid rgba(51, 65, 85, 0.5);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* slate-400 */
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-slideInUp {
+    animation: slideInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.02); }
+}
+.animate-pulseSlow {
+  animation: pulseSlow 2.5s infinite ease-in-out;
+}
+
+
+@keyframes textGradient {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+.animate-textGradient {
+    background-size: 200% 200%; /* Ensure gradient has room to move */
+    animation: textGradient 5s ease infinite;
+}
+
+/* For buttons that might show loading state */
+.btn-loading {
+    position: relative;
+    color: transparent !important; /* Hide text */
+}
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Small utility for button sizing */
+.btn-sm {
+    @apply !px-3 !py-1.5 !text-xs;
+}
