@@ -1,0 +1,50 @@
+<%- include('partials/header', { pageTitle: pageTitle, currentPath: '/project/' + project.name + '/edit' }) %>
+
+<div class="max-w-4xl mx-auto card p-6 sm:p-10 animate-fadeIn">
+    <div class="mb-8">
+        <a href="/project/<%= project.name %>" class="text-sm text-purple-400 hover:text-purple-300 transition-colors inline-flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to <%= project.name %> Details
+        </a>
+        <h1 class="text-3xl sm:text-4xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500 mt-2">
+            Edit File: <span class="font-mono text-2xl sm:text-3xl"><%= fileName %></span>
+        </h1>
+        <p class="mt-2 text-slate-400">Project: <%= project.name %></p>
+    </div>
+
+    <% if (error) { %>
+        <div class="alert-error" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline"><%- error %></span>
+        </div>
+    <% } %>
+    <% if (success) { %>
+         <div class="alert-success" role="alert">
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline"><%- success %></span>
+        </div>
+    <% } %>
+
+    <form action="/project/<%= project.name %>/edit/<%= fileName %>" method="POST" class="space-y-6">
+        <div>
+            <label for="fileContent" class="block text-sm font-medium text-slate-300 mb-1">File Content (<%= fileName %>)</label>
+            <textarea name="fileContent" id="fileContent" rows="20"
+                      class="textarea-field h-96 leading-relaxed"
+                      placeholder="Enter file content here..."><%= fileContent %></textarea>
+            <p class="text-xs text-slate-500 mt-1">Warning: Editing core project files directly can break your application. Ensure you know what you are doing.</p>
+        </div>
+
+        <div>
+            <button type="submit" class="btn-primary w-full sm:w-auto transform hover:shadow-green-500/50 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
+                <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                </svg>
+                Save Changes to <%= fileName %>
+            </button>
+        </div>
+    </form>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,65 @@
+<%- include('partials/header', { pageTitle: pageTitle, currentPath: '/deploy' }) %>
+
+<div class="max-w-3xl mx-auto card p-6 sm:p-10 animate-fadeIn">
+    <div class="text-center mb-10">
+        <h1 class="text-4xl sm:text-5xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 animate-textGradient">
+            Launch New Project
+        </h1>
+        <p class="mt-3 text-slate-400">Provide your project's code and configuration to get it live.</p>
+    </div>
+
+    <% if (error) { %>
+        <div class="alert-error" role="alert">
+            <strong class="font-bold">Deployment Error!</strong>
+            <span class="block sm:inline"><%- error %></span>
+        </div>
+    <% } %>
+    <% if (success) { %>
+         <div class="alert-success" role="alert">
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline"><%- success %></span>
+        </div>
+    <% } %>
+
+    <form action="/deploy" method="POST" class="space-y-8">
+        <div>
+            <label for="projectName" class="block text-sm font-medium text-slate-300 mb-1">Project Name</label>
+            <input type="text" name="projectName" id="projectName" required
+                   class="input-field"
+                   placeholder="e.g., my-url-shortener" value="<%= typeof formData !== 'undefined' && formData.projectName ? formData.projectName : '' %>">
+            <p class="text-xs text-slate-500 mt-1">Unique name. Only letters, numbers, hyphens (-), and underscores (_).</p>
+        </div>
+
+        <div>
+            <label for="packageJsonContent" class="block text-sm font-medium text-slate-300 mb-1">package.json Content</label>
+            <textarea name="packageJsonContent" id="packageJsonContent" rows="10" required
+                      class="textarea-field"
+                      placeholder="{&#10;  &quot;name&quot;: &quot;my-app&quot;,&#10;  &quot;version&quot;: &quot;1.0.0&quot;,&#10;  &quot;main&quot;: &quot;app.js&quot;,&#10;  &quot;scripts&quot;: {&#10;    &quot;start&quot;: &quot;node app.js&quot;&#10;  },&#10;  &quot;dependencies&quot;: {}&#10;}"><%= typeof formData !== 'undefined' && formData.packageJsonContent ? formData.packageJsonContent : '' %></textarea>
+        </div>
+
+        <div>
+            <label for="mainJsContent" class="block text-sm font-medium text-slate-300 mb-1">Main JS File Content (e.g., app.js, server.js specified in package.json)</label>
+            <textarea name="mainJsContent" id="mainJsContent" rows="15" required
+                      class="textarea-field"
+                      placeholder="// Your Node.js application code&#10;const http = require('http');&#10;&#10;const server = http.createServer((req, res) => {&#10;  res.writeHead(200, { 'Content-Type': 'text/plain' });&#10;  res.end('Hello from deployed app!\n');&#10;});&#10;&#10;const PORT = process.env.PORT || 3001;&#10;server.listen(PORT, () => {&#10;  console.log(`User app running on port ${PORT}`);&#10;});"><%= typeof formData !== 'undefined' && formData.mainJsContent ? formData.mainJsContent : '' %></textarea>
+            <p class="text-xs text-slate-500 mt-1">The filename for this content will be taken from the 'main' field in your package.json (e.g. "app.js").</p>
+        </div>
+        
+        <div>
+            <label for="entryHtmlFile" class="block text-sm font-medium text-slate-300 mb-1">Entry HTML File (Optional)</label>
+            <input type="text" name="entryHtmlFile" id="entryHtmlFile"
+                   class="input-field"
+                   placeholder="e.g., index.html or public/index.html" value="<%= typeof formData !== 'undefined' && formData.entryHtmlFile ? formData.entryHtmlFile : '' %>">
+            <p class="text-xs text-slate-500 mt-1">If your project is a static site or has a primary HTML entry point (e.g., served at '/'), specify its name (relative to project root).</p>
+        </div>
+
+        <div>
+            <button type="submit" class="btn-primary w-full transform hover:shadow-purple-500/50">
+                <svg class="w-5 h-5 mr-2 -ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                Deploy Project
+            </button>
+        </div>
+    </form>
+</div>
+
+<%- include('partials/footer') %>

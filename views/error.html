@@ -1,0 +1,16 @@
+<%- include('partials/header', { pageTitle: pageTitle, currentPath: 'error' }) %>
+
+<div class="text-center py-10 sm:py-20 animate-fadeIn">
+     <h1 class="text-8xl sm:text-9xl font-orbitron font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-500 via-yellow-500 to-red-500 mb-4 animate-pulseSlow">
+        Error
+    </h1>
+    <h2 class="text-3xl sm:text-4xl font-semibold text-slate-100 mb-6"><%= message || 'An Unexpected Glitch Occurred.' %></h2>
+    <p class="text-lg text-slate-400 mb-10 max-w-md mx-auto">
+        We've encountered a problem. Our team of virtual hamsters has been notified and is probably enjoying a tiny coffee break.
+    </p>
+    <a href="/" class="btn-primary">
+        Go to Homepage
+    </a>
+</div>
+
+<%- include('partials/footer') %>

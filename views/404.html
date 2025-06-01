@@ -1,0 +1,16 @@
+<%- include('partials/header', { pageTitle: pageTitle, currentPath: '404' }) %>
+
+<div class="text-center py-10 sm:py-20 animate-fadeIn">
+    <h1 class="text-8xl sm:text-9xl font-orbitron font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-red-500 via-pink-500 to-orange-500 mb-4 animate-pulseSlow">
+        404
+    </h1>
+    <h2 class="text-3xl sm:text-4xl font-semibold text-slate-100 mb-6">Oops! Resource Lost in Cyberspace.</h2>
+    <p class="text-lg text-slate-400 mb-10 max-w-md mx-auto">
+        The page or project you're looking for seems to have vanished, been abducted by aliens, or never existed.
+    </p>
+    <a href="/" class="btn-primary">
+        Return to Dashboard
+    </a>
+</div>
+
+<%- include('partials/footer') %>
